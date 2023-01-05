@@ -15,5 +15,5 @@ export class Product extends RootEntity {
   price: number
 
   @OneToMany(() => Rating, rating => rating.product_id)
-  rating: number
+  avg_rating: number
 }

@@ -1,6 +1,7 @@
 import { Product } from "@ventionMachineCloudTest/models"
 
 import { api } from "../api"
+
 const injectedRtkApi = api.injectEndpoints({
   endpoints: build => ({
     getManyProducts: build.query<
@@ -23,22 +24,19 @@ const injectedRtkApi = api.injectEndpoints({
         },
       }),
     }),
-    updateOneProduct: build.mutation<
-      UpdateOneProductApiResponse,
-      UpdateOneProductApiArg
-    >({
-      query: queryArg => ({
-        url: `/api/products/${queryArg.id}`,
-        method: "PATCH",
-        body: queryArg.product,
+    getOneProduct: build.query<GetOneProductApiResponse, number>({
+      query: id => ({
+        url: `/api/products/${id}`,
       }),
     }),
   }),
+
   overrideExisting: false,
 })
 export { injectedRtkApi as producstApi }
 export type GetManyProductsApiResponse /** status 200 Get many base response */ =
   Product[]
+
 export type GetManyProductsApiArg = {
   /** Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a> */
   fields?: string[]
@@ -62,12 +60,6 @@ export type GetManyProductsApiArg = {
   cache?: number
 }
 
-export type UpdateOneProductApiResponse = /** status 200 Response */ Product
-export type UpdateOneProductApiArg = {
-  id: number
-  product: Product
-}
-
 export type GetManyProductsResponseDto = {
   data: Product[]
   count: number
@@ -75,5 +67,12 @@ export type GetManyProductsResponseDto = {
   page: number
   pageCount: number
 }
-export const { useGetManyProductsQuery, useUpdateOneProductMutation } =
+
+export type GetOneProductApiResponse /** status 200 Get many base response */ =
+  Product[]
+
+export type GetOneProductResponseDto = {
+  data: Product[]
+}
+export const { useGetManyProductsQuery, useLazyGetOneProductQuery } =
   injectedRtkApi

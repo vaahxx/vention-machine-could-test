@@ -1,4 +1,4 @@
-import { Max, Min, MinLength } from "class-validator"
+import { Max, Min } from "class-validator"
 import { Column, Entity } from "typeorm"
 
 import { RootEntity } from "./root.entity"

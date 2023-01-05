@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from "@nestjs/common"
+import { Controller, Get, Param } from "@nestjs/common"
 import { ApiTags } from "@nestjs/swagger"
 import { Product } from "@ventionMachineCloudTest/models"
 
@@ -12,5 +12,10 @@ export class ProductController {
   @Get()
   findAll(): Promise<Product[]> {
     return this.service.findAll()
+  }
+
+  @Get(":id")
+  findOne(@Param() params): Promise<Product> {
+    return this.service.findOne(Number(params.id))
   }
 }

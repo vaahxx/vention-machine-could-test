@@ -3,12 +3,18 @@
  */
 
 import { producstApi } from "./product-endpoints"
+import { ratingsApi } from "./ratings-endpoints"
 
 export const addProductsCacheKeys = () =>
   producstApi.enhanceEndpoints({
     endpoints: {
       getManyProducts: { providesTags: ["products"] },
-      updateOneProduct: { invalidatesTags: ["products"] },
+    },
+  })
+export const addRatingCacheKeys = () =>
+  ratingsApi.enhanceEndpoints({
+    endpoints: {
+      createOneRating: { invalidatesTags: ["ratings"] },
     },
   })
 export const addGeneratedCacheKeys = () => {

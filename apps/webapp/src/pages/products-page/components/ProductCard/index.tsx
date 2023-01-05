@@ -1,18 +1,41 @@
 import { Badge, Button, Card, CardContent, Rating, Stack } from "@mui/material"
 import { Product } from "@ventionMachineCloudTest/models"
+import { useLazyGetOneProductQuery } from "apps/webapp/src/redux/endpoints/product-endpoints"
+import { useCreateOneRatingMutation } from "apps/webapp/src/redux/endpoints/ratings-endpoints"
+import { useEffect, useState } from "react"
 
 import { useProductCardStyles } from "./styles"
 
 interface Props {
-  product: Product & {
-    inCart?: boolean
-  }
+  product: Product
 }
 
 export const ProductCard: React.FC<Props> = ({
-  product: { name, image, price, rating, inCart },
+  product: { id, name, image, price, avg_rating },
 }) => {
+  const inCart = true
   const classes = useProductCardStyles()
+  const [createRating] = useCreateOneRatingMutation()
+  const [getProduct, { data }] = useLazyGetOneProductQuery({
+    selectFromResult: ({ data }) => ({
+      data: data?.find(product => product.id === id),
+    }),
+  })
+  const [product, setProduct] = useState<Product>(null)
+
+  useEffect(() => {
+    if (data) {
+      setProduct(data)
+    }
+  }, [data])
+
+  async function handleRatingChange(value) {
+    await createRating({
+      rating: { product_id: id, value },
+    })
+    getProduct(id)
+  }
+
   return (
     <Badge
       badgeContent="In Cart"
@@ -27,7 +50,7 @@ export const ProductCard: React.FC<Props> = ({
       <Card className={classes.card}>
         <CardContent className={classes.cardContent}>
           <Stack className={classes.productImage}>
-            <img src={image} />
+            <img src={product?.image || image} />
             <div className={classes.overlay} />
             {inCart ? (
               <Button
@@ -50,15 +73,16 @@ export const ProductCard: React.FC<Props> = ({
             )}
           </Stack>
           <Stack className={classes.productFooter}>
-            <span className={classes.productName}>{name}</span>
-            <span className={classes.productPrice}>${price}</span>
+            <span className={classes.productName}>{product?.name || name}</span>
+            <span className={classes.productPrice}>
+              ${product?.price || price}
+            </span>
             <Rating
               name="half-rating"
-              defaultValue={2.5}
-              precision={0.5}
-              value={rating}
-              onChange={(event, newValue) => {
-                // setRatings(prevState => [...prevState, { ...rating: newValue }])
+              precision={1}
+              value={Number(product?.avg_rating) || Number(avg_rating)}
+              onChange={(_, newValue) => {
+                handleRatingChange(newValue)
               }}
             />
           </Stack>
