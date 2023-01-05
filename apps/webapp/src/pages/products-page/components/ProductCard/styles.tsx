@@ -1,7 +1,7 @@
 import { Theme } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 
-export const useProductCardStyles = makeStyles((theme: Theme) => ({
+export const useProductCardStyles = makeStyles(() => ({
   card: {
     maxWidth: "21.8rem",
   },
