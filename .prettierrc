@@ -7,5 +7,5 @@
   "semi": false,
   "jsxSingleQuote": false,
   "bracketSameLine": false,
-  "printWidth": 140
+  "printWidth": 80
 }
