@@ -34,6 +34,7 @@
     "remap-redoc": "ts-node ./.do/remap-redoc.ts",
     "rename-project": "node cli/main.js rename-project",
     "start": "nx serve",
+    "start-all": "npx nx run-many --parallel --target=serve --all",
     "test": "nx test",
     "typeorm": "ts-node --project tsconfig.base.json ./node_modules/typeorm/cli.js --config apps/database/orm-config.ts",
     "db:create": "ts-node --project tsconfig.base.json ./node_modules/typeorm-extension/dist/cli/index.js db:create --config apps/database/orm-config.ts",
