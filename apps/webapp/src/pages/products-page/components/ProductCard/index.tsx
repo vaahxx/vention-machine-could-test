@@ -1,14 +1,11 @@
 import { Badge, Button, Card, CardContent, Rating, Stack } from "@mui/material"
+import { Product } from "@ventionMachineCloudTest/models"
 
 import { useProductCardStyles } from "./styles"
 
 interface Props {
-  product: {
-    name: string
-    image: string
-    price: number
-    rating: number
-    inCart: boolean
+  product: Product & {
+    inCart?: boolean
   }
 }
 

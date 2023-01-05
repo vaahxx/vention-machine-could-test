@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm"
+import { Column, Entity, OneToMany } from "typeorm"
 
 import { Rating } from "./rating.entity"
 import { RootEntity } from "./root.entity"
