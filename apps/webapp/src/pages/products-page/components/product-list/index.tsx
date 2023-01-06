@@ -1,6 +1,6 @@
 import { Product } from "@ventionMachineCloudTest/models"
 
-import { ProductCard } from "../ProductCard/index"
+import { ProductCard } from "../product-card"
 import { useProductListStyles } from "./styles"
 
 interface Props {
