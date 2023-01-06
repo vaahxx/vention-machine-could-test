@@ -6,7 +6,6 @@ export const ProductsPage: React.FC = () => {
     sort: ["id,DESC"],
   })
 
-  console.log(data)
   return (
     <>
       <h1>Flower Shop</h1>

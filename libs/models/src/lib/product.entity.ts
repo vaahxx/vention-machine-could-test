@@ -16,4 +16,7 @@ export class Product extends RootEntity {
 
   @OneToMany(() => Rating, rating => rating.product_id)
   avg_rating: number
+
+  @Column({ nullable: false })
+  in_cart: boolean
 }

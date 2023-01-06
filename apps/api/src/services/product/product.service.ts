@@ -24,6 +24,7 @@ export class ProductService {
         , image
         , price
         , avg_rating
+        , in_cart
       from product p
       inner join product_ratings pr ON pr.product_id = p.id
     `)
@@ -45,10 +46,21 @@ export class ProductService {
       , image
       , price
       , avg_rating
+      , in_cart
     from product p
     inner join product_ratings pr ON pr.product_id = p.id
     where p.id = ${id}
+    order by p.id
   `
     )
+  }
+
+  update(id: number, product: Product): Promise<Product> {
+    const { avg_rating, ...rest } = product
+
+    return this.repository.save({
+      id,
+      ...rest,
+    })
   }
 }

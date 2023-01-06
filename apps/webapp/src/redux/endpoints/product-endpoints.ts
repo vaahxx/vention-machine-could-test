@@ -29,6 +29,16 @@ const injectedRtkApi = api.injectEndpoints({
         url: `/api/products/${id}`,
       }),
     }),
+    updateOneProduct: build.mutation<
+      UpdateOneProductApiResponse,
+      UpdateOneProductApiArg
+    >({
+      query: queryArg => ({
+        url: `/api/products/${queryArg.id}`,
+        method: "PATCH",
+        body: queryArg.product,
+      }),
+    }),
   }),
 
   overrideExisting: false,
@@ -74,5 +84,13 @@ export type GetOneProductApiResponse /** status 200 Get many base response */ =
 export type GetOneProductResponseDto = {
   data: Product[]
 }
-export const { useGetManyProductsQuery, useLazyGetOneProductQuery } =
-  injectedRtkApi
+export type UpdateOneProductApiResponse = /** status 200 Response */ Product
+export type UpdateOneProductApiArg = {
+  id: number
+  product: Product
+}
+export const {
+  useGetManyProductsQuery,
+  useLazyGetOneProductQuery,
+  useUpdateOneProductMutation,
+} = injectedRtkApi

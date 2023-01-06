@@ -1,6 +1,9 @@
 import { Badge, Button, Card, CardContent, Rating, Stack } from "@mui/material"
 import { Product } from "@ventionMachineCloudTest/models"
-import { useLazyGetOneProductQuery } from "apps/webapp/src/redux/endpoints/product-endpoints"
+import {
+  useLazyGetOneProductQuery,
+  useUpdateOneProductMutation,
+} from "apps/webapp/src/redux/endpoints/product-endpoints"
 import { useCreateOneRatingMutation } from "apps/webapp/src/redux/endpoints/ratings-endpoints"
 import { useEffect, useState } from "react"
 
@@ -11,11 +14,11 @@ interface Props {
 }
 
 export const ProductCard: React.FC<Props> = ({
-  product: { id, name, image, price, avg_rating },
+  product: { id, name, image, price, avg_rating, in_cart },
 }) => {
-  const inCart = true
   const classes = useProductCardStyles()
   const [createRating] = useCreateOneRatingMutation()
+  const [updateProduct] = useUpdateOneProductMutation()
   const [getProduct, { data }] = useLazyGetOneProductQuery({
     selectFromResult: ({ data }) => ({
       data: data?.find(product => product.id === id),
@@ -29,17 +32,29 @@ export const ProductCard: React.FC<Props> = ({
     }
   }, [data])
 
-  async function handleRatingChange(value) {
+  async function handleRatingChange(value: number) {
     await createRating({
       rating: { product_id: id, value },
     })
     getProduct(id)
   }
 
+  async function handleClick(updatedInCart: boolean): Promise<void> {
+    const product = { name, image, price, avg_rating, in_cart: updatedInCart }
+    try {
+      const response = await updateProduct({ id, product })
+      setProduct((response as { data: Product }).data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const actuallyInCart = product?.in_cart ?? in_cart
+
   return (
     <Badge
       badgeContent="In Cart"
-      invisible={!inCart}
+      invisible={!actuallyInCart}
       color="success"
       classes={{ root: classes.badge }}
       anchorOrigin={{
@@ -52,25 +67,14 @@ export const ProductCard: React.FC<Props> = ({
           <Stack className={classes.productImage}>
             <img src={product?.image || image} />
             <div className={classes.overlay} />
-            {inCart ? (
-              <Button
-                variant="contained"
-                color="error"
-                className={classes.cardButton}
-                // onClick={handleRemoveFromCart(product)}
-              >
-                {"Remove from cart"}
-              </Button>
-            ) : (
-              <Button
-                variant="contained"
-                color="success"
-                className={classes.cardButton}
-                // onClick={handleAddToCart(product)}
-              >
-                {"Add to cart"}
-              </Button>
-            )}
+            <Button
+              variant="contained"
+              color={actuallyInCart ? "error" : "success"}
+              className={classes.cardButton}
+              onClick={() => handleClick(!actuallyInCart)}
+            >
+              {actuallyInCart ? "Remove from cart" : "Add to cart"}
+            </Button>
           </Stack>
           <Stack className={classes.productFooter}>
             <span className={classes.productName}>{product?.name || name}</span>
