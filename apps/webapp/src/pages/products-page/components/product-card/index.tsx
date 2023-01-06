@@ -1,12 +1,13 @@
 import { Badge, Button, Card, CardContent, Rating, Stack } from "@mui/material"
 import { Product } from "@ventionMachineCloudTest/models"
+import React from "react"
+import { useEffect, useState } from "react"
+
 import {
   useLazyGetOneProductQuery,
   useUpdateOneProductMutation,
-} from "apps/webapp/src/redux/endpoints/product-endpoints"
-import { useCreateOneRatingMutation } from "apps/webapp/src/redux/endpoints/ratings-endpoints"
-import { useEffect, useState } from "react"
-
+} from "../../../../redux/endpoints/product-endpoints"
+import { useCreateOneRatingMutation } from "../../../../redux/endpoints/ratings-endpoints"
 import { useProductCardStyles } from "./styles"
 
 interface Props {

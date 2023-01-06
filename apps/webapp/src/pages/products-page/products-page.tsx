@@ -1,3 +1,5 @@
+import React from "react"
+
 import { useGetManyProductsQuery } from "../../redux/endpoints/product-endpoints"
 import { ProductList } from "./components/product-list"
 

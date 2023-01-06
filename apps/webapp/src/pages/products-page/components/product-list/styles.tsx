@@ -1,5 +1,4 @@
 import { Theme } from "@mui/material"
-import { pink } from "@mui/material/colors"
 import { makeStyles } from "@mui/styles"
 
 export const useProductListStyles = makeStyles((theme: Theme) => ({

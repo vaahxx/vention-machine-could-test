@@ -1,4 +1,5 @@
 import { CssBaseline } from "@mui/material"
+import React from "react"
 
 import { ProductsPage } from "../pages/products-page/products-page"
 import { useAppStyles } from "./app.styles"
