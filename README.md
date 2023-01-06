@@ -20,6 +20,12 @@ Here's an example to give you inspiration of a very simple UI representing the d
 ![image](https://user-images.githubusercontent.com/6068943/150595559-24671896-91fe-4746-bbef-ad62ea9c7153.png)
 ![image](https://user-images.githubusercontent.com/6068943/150595566-a99ea3d2-12c3-4d7e-9267-91036e76277d.png)
 
+# Images
+
+![image](https://user-images.githubusercontent.com/39314687/211106499-886f67c7-4764-44ff-8635-0b821a80df8b.png)
+
+![image](https://user-images.githubusercontent.com/39314687/211106559-23217f16-bd54-442f-a832-59e0f4eea200.png)
+
 ## 💥 Getting Started
 
 ### Prerequisites
@@ -120,15 +126,9 @@ Problem can be found here: https://github.com/nestjsx/crud/pull/297
 
 So instead I’m using a raw query in `apps/api/src/services/product/product.service.ts` with a naive implementation.
 
-### 4 - Removed test
-
-I removed end-to-end health test because of the following error, which I wasn't able to resolve:
-
-![FAIL appsapisrcendpointshealthhealth e2e spec ts](https://user-images.githubusercontent.com/39314687/211094255-803ee566-162d-4e06-8d2f-a5e2f7874dfc.png)
-
-### 5 - Naives implementations
+### 4 - Naives implementations
 
 I understand that there was some naive implementations along the way due to lack of experience and time using the Stator monorepo template. 
 
-I hope this test would somehow reaches to the expectation of the reviewers and if not, even so, it was a fun test to work on and a nice opportunity to implement something that I'm not experienced with. I really appreciate the opportunity :)
+I hope this test somehow reaches the expectation of the reviewers and if not, even so, it was a fun test to work on and a nice opportunity to implement something that I'm not experienced with. I really appreciate it :)
 
