@@ -1,5 +1,5 @@
 import { useGetManyProductsQuery } from "../../redux/endpoints/product-endpoints"
-import { ProductList } from "./components/ProductList"
+import { ProductList } from "./components/product-list"
 
 export const ProductsPage: React.FC = () => {
   const { data } = useGetManyProductsQuery({
