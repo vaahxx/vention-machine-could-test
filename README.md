@@ -12,7 +12,7 @@ This test will consist of building a very simple application which represents a 
 ## Bonus points
 - [x] **Use TypeScript**
 - [x] Implement a backend and persist the state in a database
-- [ ] Have a single command to launch the whole application
+- [x] Have a single command to launch the whole application
 - [x] Use the open-source project [stator](https://github.com/chocolat-chaud-io/stator) as a template for your application
 
 Here's an example to give you inspiration of a very simple UI representing the different states of what we're looking for:
