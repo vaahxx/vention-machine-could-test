@@ -1,6 +1,6 @@
 import { ConfigService } from "@nestjs/config"
 import { TypeOrmModuleOptions } from "@nestjs/typeorm/dist/interfaces/typeorm-options.interface"
-import { Product, Rating, Todo } from "@ventionMachineCloudTest/models"
+import { Product, Rating } from "@ventionMachineCloudTest/models"
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const ormConfig = require("../../../database/orm-config")
@@ -18,7 +18,9 @@ export const configuration = () => ({
   },
 })
 
-export const getOrmConfigFn = async (configService: ConfigService): Promise<TypeOrmModuleOptions> => ({
+export const getOrmConfigFn = async (
+  configService: ConfigService
+): Promise<TypeOrmModuleOptions> => ({
   type: "postgres",
   host: configService.get("database.host"),
   port: configService.get<number>("database.port"),
@@ -27,8 +29,10 @@ export const getOrmConfigFn = async (configService: ConfigService): Promise<Type
   password: configService.get("database.password"),
   synchronize: configService.get("database.synchronize"),
   keepConnectionAlive: configService.get("database.keepConnectionAlive"),
-  ssl: configService.get("database.certificateAuthority") ? { ca: configService.get("database.certificateAuthority") } : false,
-  entities: [Todo, Product, Rating],
+  ssl: configService.get("database.certificateAuthority")
+    ? { ca: configService.get("database.certificateAuthority") }
+    : false,
+  entities: [Product, Rating],
   logging: ["error"],
   retryAttempts: configService.get<number>("database.retryAttempts"),
 })

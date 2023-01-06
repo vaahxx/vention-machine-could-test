@@ -5,7 +5,6 @@ import { configuration } from "../config/configuration"
 import { HealthModule } from "../endpoints/health/health.module"
 import { ProductModule } from "../endpoints/product/product.module"
 import { RatingModule } from "../endpoints/rating/rating.module"
-import { TodosModule } from "../endpoints/todos/todos.module"
 import { getRootModuleImports } from "../utils/utils"
 
 @Module({
@@ -16,7 +15,6 @@ import { getRootModuleImports } from "../utils/utils"
       exclude: ["/api*"],
     }),
     HealthModule,
-    TodosModule,
     ProductModule,
     RatingModule,
   ],

@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common"
 import { TypeOrmModule } from "@nestjs/typeorm"
-import { Rating, Todo } from "@ventionMachineCloudTest/models"
+import { Rating } from "@ventionMachineCloudTest/models"
 
 import { RatingServiceModule } from "../../services/rating/rating-service.module"
 import { RatingService } from "../../services/rating/rating.service"
