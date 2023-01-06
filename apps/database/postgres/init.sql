@@ -8,8 +8,8 @@ create table product (
 );
 
 create table rating (
-  product_id: int,
-  value: int
+  product_id int,
+  value int
 );
 
 insert into product (name, image, price, in_cart)
