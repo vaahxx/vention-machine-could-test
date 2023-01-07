@@ -55,6 +55,21 @@ npm start api
 npm start webapp
 ```
 
+
+Or, first run:
+
+```
+npm run postgres
+```
+
+This is necessary to create docker's container.
+
+Stop postgres execution and simply run:
+
+```
+npm run start-all
+```
+
 ### Populate database
 Run the following SQL statements:
 
@@ -76,49 +91,13 @@ values
 
 ## Observations
 
-### 1 - Node version
-
-First of all, it worth mentioning that I'm using M1 Mac to run this repository and it wasn't as smooth as I thought it would be. The first problem I found was the node version (it's using Node 14 as the first version that is fully compatible with M1 is 16 -- even though I know I can run it using Rosetta :()
-
-While installing dependencies with the provided node version, I got the following error:
-
-```
-npm WARN old lockfile 
-npm WARN old lockfile The package-lock.json file was created with an old version of npm,
-npm WARN old lockfile so supplemental metadata must be fetched from the registry.
-npm WARN old lockfile 
-npm WARN old lockfile This is a one-time fix-up, please be patient...
-npm WARN old lockfile 
-npm ERR! code EBADENGINE
-npm ERR! engine Unsupported engine
-npm ERR! engine Not compatible with your version of node/npm: @angular-devkit/core@13.0.2
-npm ERR! notsup Not compatible with your version of node/npm: @angular-devkit/core@13.0.2
-npm ERR! notsup Required: {"node":"^12.20.0 || ^14.15.0 || >=16.10.0","npm":"^6.11.0 || ^7.5.6 || >=8.0.0","yarn":">= 1.13.0"}
-npm ERR! notsup Actual:   {"npm":"7.24.2","node":"14.13.1"}
-
-npm ERR! A complete log of this run can be found in:
-npm ERR!     /Users/valentina/.npm/_logs/2023-01-03T22_08_21_317Z-debug.log
-npm ERR! code ELIFECYCLE
-npm ERR! errno 1
-npm ERR! stator@ get-started: `npm i && npm run start --prefix tools/getting-started`
-npm ERR! Exit status 1
-npm ERR! 
-npm ERR! Failed at the stator@ get-started script.
-npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
-
-npm ERR! A complete log of this run can be found in:
-npm ERR!     /Users/valentina/.npm/_logs/2023-01-03T22_08_21_400Z-debug.log
-```
-
-So I updated node version to 18.12.1 and created .nvmrc to set the version that worked for me.
-
-### 2 - Single command to launch the whole application
+### 1 - Single command to launch the whole application
 
 I created a single script to launch the whole application.
 
 ```"start-all": "npx nx run-many --parallel --target=serve --all"```
 
-### 3 - Nestjsx/crud
+### 2 - Nestjsx/crud
 
 Seems like this lib doesn’t make data aggregation (e.g aggregate ratings average into the product entity).
 
@@ -126,7 +105,7 @@ Problem can be found here: https://github.com/nestjsx/crud/pull/297
 
 So instead I’m using a raw query in `apps/api/src/services/product/product.service.ts` with a naive implementation.
 
-### 4 - Naives implementations
+### 3 - Naives implementations
 
 I understand that there was some naive implementations along the way due to lack of experience and time using the Stator monorepo template. 
 
